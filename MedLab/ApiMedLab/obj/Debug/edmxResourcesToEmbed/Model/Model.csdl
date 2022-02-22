@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedLabModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Accountant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDService" Type="Int32" Nullable="false" />
+    <Property Name="Invoice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="IDRole" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Accountant_Role" FromRole="Accountant" ToRole="Role" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_Accountant_Service" FromRole="Accountant" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="Analyzer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ArrivalTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LeadTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ServiceRendered" Relationship="Self.FK_ServiceRendered_Analyzer" FromRole="Analyzer" ToRole="ServiceRendered" />
+  </EntityType>
+  <EntityType Name="InsuranceCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="INN" Type="Int32" Nullable="false" />
+    <Property Name="PaymentAccount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="BIK" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_InsuranceCompany" FromRole="InsuranceCompany" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Laborant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IPAdress" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Lastenter" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IDService" Type="Int32" Nullable="false" />
+    <Property Name="IDRole" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Laborant_Role" FromRole="Laborant" ToRole="Role" />
+    <NavigationProperty Name="ServiceRendered" Relationship="Self.FK_ServiceRendered_Laborant" FromRole="Laborant" ToRole="ServiceRendered" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IDService" Type="Int32" Nullable="false" />
+    <Property Name="IDOrderStatus" Type="Int32" Nullable="false" />
+    <Property Name="LeadTime" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="OrderStatus" Relationship="Self.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatus" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_Order_Service" FromRole="Order" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="OrderStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Order_OrderStatus" FromRole="OrderStatus" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PSerias" Type="Int32" Nullable="false" />
+    <Property Name="PNumder" Type="Int32" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PolicyNumber" Type="Int32" Nullable="false" />
+    <Property Name="IDPolicyType" Type="Int32" Nullable="false" />
+    <Property Name="IDInsuranceCompany" Type="Int32" Nullable="false" />
+    <Property Name="IDRole" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="InsuranceCompany" Relationship="Self.FK_Patient_InsuranceCompany" FromRole="Patient" ToRole="InsuranceCompany" />
+    <NavigationProperty Name="PolicyType" Relationship="Self.FK_Patient_PolicyType1" FromRole="Patient" ToRole="PolicyType" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Patient_Role" FromRole="Patient" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="PolicyType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_PolicyType1" FromRole="PolicyType" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Accountant" Relationship="Self.FK_Accountant_Role" FromRole="Role" ToRole="Accountant" />
+    <NavigationProperty Name="Laborant" Relationship="Self.FK_Laborant_Role" FromRole="Role" ToRole="Laborant" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Role" FromRole="Role" ToRole="Patient" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="DeadLine" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Accountant" Relationship="Self.FK_Accountant_Service" FromRole="Service" ToRole="Accountant" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Order_Service" FromRole="Service" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="ServiceRendered">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="IDService" Type="Int32" Nullable="false" />
+    <Property Name="Issued" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IDLaborant" Type="Int32" Nullable="false" />
+    <Property Name="IDAnalyzer" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Analyzer" Relationship="Self.FK_ServiceRendered_Analyzer" FromRole="ServiceRendered" ToRole="Analyzer" />
+    <NavigationProperty Name="Laborant" Relationship="Self.FK_ServiceRendered_Laborant" FromRole="ServiceRendered" ToRole="Laborant" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDRole" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_Accountant_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Accountant" Type="Self.Accountant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Accountant">
+        <PropertyRef Name="IDRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Accountant_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="Accountant" Type="Self.Accountant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Accountant">
+        <PropertyRef Name="IDService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceRendered_Analyzer">
+    <End Role="Analyzer" Type="Self.Analyzer" Multiplicity="1" />
+    <End Role="ServiceRendered" Type="Self.ServiceRendered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Analyzer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ServiceRendered">
+        <PropertyRef Name="IDAnalyzer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_InsuranceCompany">
+    <End Role="InsuranceCompany" Type="Self.InsuranceCompany" Multiplicity="1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InsuranceCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="IDInsuranceCompany" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Laborant_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Laborant" Type="Self.Laborant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Laborant">
+        <PropertyRef Name="IDRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceRendered_Laborant">
+    <End Role="Laborant" Type="Self.Laborant" Multiplicity="1" />
+    <End Role="ServiceRendered" Type="Self.ServiceRendered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Laborant">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ServiceRendered">
+        <PropertyRef Name="IDLaborant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_OrderStatus">
+    <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="IDOrderStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="IDService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_PolicyType1">
+    <End Role="PolicyType" Type="Self.PolicyType" Multiplicity="1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PolicyType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="IDPolicyType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="IDRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="IDRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedLabEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accountant" EntityType="Self.Accountant" />
+    <EntitySet Name="Analyzer" EntityType="Self.Analyzer" />
+    <EntitySet Name="InsuranceCompany" EntityType="Self.InsuranceCompany" />
+    <EntitySet Name="Laborant" EntityType="Self.Laborant" />
+    <EntitySet Name="Order" EntityType="Self.Order" />
+    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
+    <EntitySet Name="Patient" EntityType="Self.Patient" />
+    <EntitySet Name="PolicyType" EntityType="Self.PolicyType" />
+    <EntitySet Name="Role" EntityType="Self.Role" />
+    <EntitySet Name="Service" EntityType="Self.Service" />
+    <EntitySet Name="ServiceRendered" EntityType="Self.ServiceRendered" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_Accountant_Role" Association="Self.FK_Accountant_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Accountant" EntitySet="Accountant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Accountant_Service" Association="Self.FK_Accountant_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="Accountant" EntitySet="Accountant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceRendered_Analyzer" Association="Self.FK_ServiceRendered_Analyzer">
+      <End Role="Analyzer" EntitySet="Analyzer" />
+      <End Role="ServiceRendered" EntitySet="ServiceRendered" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_InsuranceCompany" Association="Self.FK_Patient_InsuranceCompany">
+      <End Role="InsuranceCompany" EntitySet="InsuranceCompany" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Laborant_Role" Association="Self.FK_Laborant_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Laborant" EntitySet="Laborant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceRendered_Laborant" Association="Self.FK_ServiceRendered_Laborant">
+      <End Role="Laborant" EntitySet="Laborant" />
+      <End Role="ServiceRendered" EntitySet="ServiceRendered" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_OrderStatus" Association="Self.FK_Order_OrderStatus">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Service" Association="Self.FK_Order_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_PolicyType1" Association="Self.FK_Patient_PolicyType1">
+      <End Role="PolicyType" EntitySet="PolicyType" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_Role" Association="Self.FK_Patient_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

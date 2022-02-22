@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbinventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cabinet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CabinetInventoryObject" Relationship="Self.FK_CabinetInventoryObject_Cabinet" FromRole="Cabinet" ToRole="CabinetInventoryObject" />
+  </EntityType>
+  <EntityType Name="CabinetInventoryObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDInventoryObject" Type="Int32" Nullable="false" />
+    <Property Name="IDCabinet" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Cabinet" Relationship="Self.FK_CabinetInventoryObject_Cabinet" FromRole="CabinetInventoryObject" ToRole="Cabinet" />
+    <NavigationProperty Name="InventoryObject" Relationship="Self.FK_CabinetInventoryObject_InventoryObject" FromRole="CabinetInventoryObject" ToRole="InventoryObject" />
+  </EntityType>
+  <EntityType Name="CurrentStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDStatus" Type="Int32" Nullable="false" />
+    <Property Name="NumberAct" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_CurrentStatus_Status" FromRole="CurrentStatus" ToRole="Status" />
+    <NavigationProperty Name="InventoryObject" Relationship="Self.FK_InventoryObject_CurrentStatus" FromRole="CurrentStatus" ToRole="InventoryObject" />
+  </EntityType>
+  <EntityType Name="Employe">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="InventoryObject" Relationship="Self.FK_InventoryObject_Employe" FromRole="Employe" ToRole="InventoryObject" />
+  </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CabinetNumber" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="IDInventoryObject" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="InventoryObject" Relationship="Self.FK_History_InventoryObject" FromRole="History" ToRole="InventoryObject" />
+  </EntityType>
+  <EntityType Name="InventoryObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="InventoryNumber" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CommissioningDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DocumentationPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDType" Type="Int32" Nullable="false" />
+    <Property Name="IDSubType" Type="Int32" Nullable="false" />
+    <Property Name="LifeTime" Type="Int32" Nullable="false" />
+    <Property Name="IDInvoce" Type="Int32" Nullable="false" />
+    <Property Name="IDCurrentStatus" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="13" Scale="2" Nullable="false" />
+    <Property Name="IDEmployee" Type="Int32" Nullable="false" />
+    <Property Name="IDInventoryObjectDetail" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CabinetInventoryObject" Relationship="Self.FK_CabinetInventoryObject_InventoryObject" FromRole="InventoryObject" ToRole="CabinetInventoryObject" />
+    <NavigationProperty Name="CurrentStatus" Relationship="Self.FK_InventoryObject_CurrentStatus" FromRole="InventoryObject" ToRole="CurrentStatus" />
+    <NavigationProperty Name="Employe" Relationship="Self.FK_InventoryObject_Employe" FromRole="InventoryObject" ToRole="Employe" />
+    <NavigationProperty Name="History" Relationship="Self.FK_History_InventoryObject" FromRole="InventoryObject" ToRole="History" />
+    <NavigationProperty Name="Invoce" Relationship="Self.FK_InventoryObject_Invoce" FromRole="InventoryObject" ToRole="Invoce" />
+    <NavigationProperty Name="SubType" Relationship="Self.FK_InventoryObject_SubType" FromRole="InventoryObject" ToRole="SubType" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_InventoryObject_Type" FromRole="InventoryObject" ToRole="Type" />
+    <NavigationProperty Name="InventoryObjectInentoryObjectDetails" Relationship="Self.FK_InventoryObjectInentoryObjectDetails_InventoryObject" FromRole="InventoryObject" ToRole="InventoryObjectInentoryObjectDetails" />
+  </EntityType>
+  <EntityType Name="InventoryObjectDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SeriaNumber" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="Title" Type="String" MaxLength="500" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="InventoryObjectInentoryObjectDetails" Relationship="Self.FK_InventoryObjectInentoryObjectDetails_InventoryObjectDetails" FromRole="InventoryObjectDetails" ToRole="InventoryObjectInentoryObjectDetails" />
+  </EntityType>
+  <EntityType Name="InventoryObjectInentoryObjectDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDInventoryObject" Type="Int32" Nullable="false" />
+    <Property Name="IDInventoryObjectDetails" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InventoryObject" Relationship="Self.FK_InventoryObjectInentoryObjectDetails_InventoryObject" FromRole="InventoryObjectInentoryObjectDetails" ToRole="InventoryObject" />
+    <NavigationProperty Name="InventoryObjectDetails" Relationship="Self.FK_InventoryObjectInentoryObjectDetails_InventoryObjectDetails" FromRole="InventoryObjectInentoryObjectDetails" ToRole="InventoryObjectDetails" />
+  </EntityType>
+  <EntityType Name="Invoce">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="InventoryObject" Relationship="Self.FK_InventoryObject_Invoce" FromRole="Invoce" ToRole="InventoryObject" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CurrentStatus" Relationship="Self.FK_CurrentStatus_Status" FromRole="Status" ToRole="CurrentStatus" />
+  </EntityType>
+  <EntityType Name="SubType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDType" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="InventoryObject" Relationship="Self.FK_InventoryObject_SubType" FromRole="SubType" ToRole="InventoryObject" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_SubType_Type" FromRole="SubType" ToRole="Type" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="InventoryObject" Relationship="Self.FK_InventoryObject_Type" FromRole="Type" ToRole="InventoryObject" />
+    <NavigationProperty Name="SubType" Relationship="Self.FK_SubType_Type" FromRole="Type" ToRole="SubType" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CabinetInventoryObject_Cabinet">
+    <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="1" />
+    <End Role="CabinetInventoryObject" Type="Self.CabinetInventoryObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cabinet">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CabinetInventoryObject">
+        <PropertyRef Name="IDCabinet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CabinetInventoryObject_InventoryObject">
+    <End Role="InventoryObject" Type="Self.InventoryObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CabinetInventoryObject" Type="Self.CabinetInventoryObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryObject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CabinetInventoryObject">
+        <PropertyRef Name="IDInventoryObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CurrentStatus_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="CurrentStatus" Type="Self.CurrentStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CurrentStatus">
+        <PropertyRef Name="IDStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryObject_CurrentStatus">
+    <End Role="CurrentStatus" Type="Self.CurrentStatus" Multiplicity="1" />
+    <End Role="InventoryObject" Type="Self.InventoryObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrentStatus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InventoryObject">
+        <PropertyRef Name="IDCurrentStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryObject_Employe">
+    <End Role="Employe" Type="Self.Employe" Multiplicity="1" />
+    <End Role="InventoryObject" Type="Self.InventoryObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employe">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InventoryObject">
+        <PropertyRef Name="IDEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_History_InventoryObject">
+    <End Role="InventoryObject" Type="Self.InventoryObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="History" Type="Self.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryObject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="IDInventoryObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryObject_Invoce">
+    <End Role="Invoce" Type="Self.Invoce" Multiplicity="1" />
+    <End Role="InventoryObject" Type="Self.InventoryObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoce">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InventoryObject">
+        <PropertyRef Name="IDInvoce" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryObject_SubType">
+    <End Role="SubType" Type="Self.SubType" Multiplicity="1" />
+    <End Role="InventoryObject" Type="Self.InventoryObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InventoryObject">
+        <PropertyRef Name="IDSubType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryObject_Type">
+    <End Role="Type" Type="Self.Type" Multiplicity="1" />
+    <End Role="InventoryObject" Type="Self.InventoryObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InventoryObject">
+        <PropertyRef Name="IDType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryObjectInentoryObjectDetails_InventoryObject">
+    <End Role="InventoryObject" Type="Self.InventoryObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InventoryObjectInentoryObjectDetails" Type="Self.InventoryObjectInentoryObjectDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryObject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InventoryObjectInentoryObjectDetails">
+        <PropertyRef Name="IDInventoryObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryObjectInentoryObjectDetails_InventoryObjectDetails">
+    <End Role="InventoryObjectDetails" Type="Self.InventoryObjectDetails" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InventoryObjectInentoryObjectDetails" Type="Self.InventoryObjectInentoryObjectDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryObjectDetails">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InventoryObjectInentoryObjectDetails">
+        <PropertyRef Name="IDInventoryObjectDetails" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubType_Type">
+    <End Role="Type" Type="Self.Type" Multiplicity="1" />
+    <End Role="SubType" Type="Self.SubType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubType">
+        <PropertyRef Name="IDType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbinventoryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cabinet" EntityType="Self.Cabinet" />
+    <EntitySet Name="CabinetInventoryObject" EntityType="Self.CabinetInventoryObject" />
+    <EntitySet Name="CurrentStatus" EntityType="Self.CurrentStatus" />
+    <EntitySet Name="Employe" EntityType="Self.Employe" />
+    <EntitySet Name="History" EntityType="Self.History" />
+    <EntitySet Name="InventoryObject" EntityType="Self.InventoryObject" />
+    <EntitySet Name="InventoryObjectDetails" EntityType="Self.InventoryObjectDetails" />
+    <EntitySet Name="InventoryObjectInentoryObjectDetails" EntityType="Self.InventoryObjectInentoryObjectDetails" />
+    <EntitySet Name="Invoce" EntityType="Self.Invoce" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="SubType" EntityType="Self.SubType" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Type" EntityType="Self.Type" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_CabinetInventoryObject_Cabinet" Association="Self.FK_CabinetInventoryObject_Cabinet">
+      <End Role="Cabinet" EntitySet="Cabinet" />
+      <End Role="CabinetInventoryObject" EntitySet="CabinetInventoryObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CabinetInventoryObject_InventoryObject" Association="Self.FK_CabinetInventoryObject_InventoryObject">
+      <End Role="InventoryObject" EntitySet="InventoryObject" />
+      <End Role="CabinetInventoryObject" EntitySet="CabinetInventoryObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CurrentStatus_Status" Association="Self.FK_CurrentStatus_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="CurrentStatus" EntitySet="CurrentStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryObject_CurrentStatus" Association="Self.FK_InventoryObject_CurrentStatus">
+      <End Role="CurrentStatus" EntitySet="CurrentStatus" />
+      <End Role="InventoryObject" EntitySet="InventoryObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryObject_Employe" Association="Self.FK_InventoryObject_Employe">
+      <End Role="Employe" EntitySet="Employe" />
+      <End Role="InventoryObject" EntitySet="InventoryObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_History_InventoryObject" Association="Self.FK_History_InventoryObject">
+      <End Role="InventoryObject" EntitySet="InventoryObject" />
+      <End Role="History" EntitySet="History" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryObject_Invoce" Association="Self.FK_InventoryObject_Invoce">
+      <End Role="Invoce" EntitySet="Invoce" />
+      <End Role="InventoryObject" EntitySet="InventoryObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryObject_SubType" Association="Self.FK_InventoryObject_SubType">
+      <End Role="SubType" EntitySet="SubType" />
+      <End Role="InventoryObject" EntitySet="InventoryObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryObject_Type" Association="Self.FK_InventoryObject_Type">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="InventoryObject" EntitySet="InventoryObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryObjectInentoryObjectDetails_InventoryObject" Association="Self.FK_InventoryObjectInentoryObjectDetails_InventoryObject">
+      <End Role="InventoryObject" EntitySet="InventoryObject" />
+      <End Role="InventoryObjectInentoryObjectDetails" EntitySet="InventoryObjectInentoryObjectDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryObjectInentoryObjectDetails_InventoryObjectDetails" Association="Self.FK_InventoryObjectInentoryObjectDetails_InventoryObjectDetails">
+      <End Role="InventoryObjectDetails" EntitySet="InventoryObjectDetails" />
+      <End Role="InventoryObjectInentoryObjectDetails" EntitySet="InventoryObjectInentoryObjectDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubType_Type" Association="Self.FK_SubType_Type">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="SubType" EntitySet="SubType" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

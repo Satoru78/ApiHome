@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3d10035f6a5b49e7bea3cf60d7b85c49" Name="Diagram1">
+        <EntityTypeShape EntityType="dbinventoryModel.Cabinet" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.CabinetInventoryObject" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.CurrentStatus" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.Employe" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.History" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.InventoryObject" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.InventoryObjectDetails" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.InventoryObjectInentoryObjectDetails" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.Invoce" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.Status" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.SubType" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.Type" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbinventoryModel.User" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="dbinventoryModel.FK_CabinetInventoryObject_Cabinet" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_CabinetInventoryObject_InventoryObject" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_CurrentStatus_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_InventoryObject_CurrentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_InventoryObject_Employe" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_History_InventoryObject" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_InventoryObject_Invoce" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_InventoryObject_SubType" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_InventoryObject_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_InventoryObjectInentoryObjectDetails_InventoryObject" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_InventoryObjectInentoryObjectDetails_InventoryObjectDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="dbinventoryModel.FK_SubType_Type" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
